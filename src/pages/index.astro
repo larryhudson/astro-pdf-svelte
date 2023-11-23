@@ -1,0 +1,22 @@
+---
+import PDFViewer from "../components/PDFViewer.svelte";
+import PdfjsUrl from "pdfjs-dist/build/pdf.mjs?url"
+import PdfjsWorkerUrl from "pdfjs-dist/build/pdf.worker.mjs?url"
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+    <script is:inline src={PdfjsUrl} type="module" />
+
+	</head>
+	<body>
+  <h1>PDF viewer with Astro, Svelte and PDFJS</h1>
+  <PDFViewer workerUrl={PdfjsWorkerUrl} client:only="svelte" />
+	</body>
+</html>
