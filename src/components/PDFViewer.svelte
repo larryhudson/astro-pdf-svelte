@@ -176,10 +176,16 @@
   }
 
   function setParagraphTag(tag) {
-    // const paragraph = paragraphs.find((p) => p.id === selectedParagraph);
-    // paragraph.tag = tag;
-    //
-    // console.log({ paragraphs });
+    const id = selectedParagraph;
+    // this feels like React :(
+    paragraphs.update((items) => {
+      return items.map((item) => {
+        if (item.id === id) {
+          return { ...item, tag };
+        }
+        return item;
+      });
+    });
   }
 
   async function extractContent() {
@@ -250,12 +256,12 @@
       }}
       on:mouseover={() => handleHover(coord)}
       class:selected={selectedParagraph === coord.id}
-      class="interactive-box button-reset"
+      class="interactive-box button-reset tag-{coord.tag}"
       style="left: {coord.x * scale + translateX}px; top: {coord.y * scale +
         translateY}px; width: {coord.width * scale}px; height: {coord.height *
         scale}px;"
     >
-      {isReadyToOrder && coord.order}
+      {#if isReadyToOrder}{coord.order}{/if}
     </button>
   {/each}
 </div>
